@@ -53,6 +53,7 @@ insert into personel values('1006', 'Sena Beyaz', '100000');
 
 select * from personel;
 
+
 -- BETWEEN
 /*
 Belirttiğimiz 2 veri arasindaki bilgileri listeler
@@ -66,6 +67,7 @@ select * from personel where id>=1002 and id<=1005;
 -- SORU06: Derya Soylu ile Yavuz Bal arasındaki personel bilgilerini listele
 select * from personel where isim between 'Derya Soylu' and 'Yavuz Bal';
 
+
 -- SORU07: id'si 1001,1002 ve 1004 olan prsonel bilgilerini listele
 select * from personel where id ='1001' or id='1002' or id='1004';
 select * from personel where id in(1001,1002,1004);
@@ -76,18 +78,19 @@ select * from personel where maas in(70000, 100000);
 -- in
 -- birden fazla ifade ile tanimlayabileceğimiz durumlarda kullailir.
 
--- or: belirtilen şartlar gerçekleşirse kayit listeler​
--- and:
+-- or: belirtilen şartlar gerçekleşirse kayit listeler
 
+-- and:
 -- yarin 3 sinav
+
 
 /*
 SELECT - LIKE
 LIKE: Sorgulama yaparken belirli patternleri kullanabilmezi sağlar
-​
+
 SELECT sutun1, sutun2, ...
 FROM tablo_adı WHERE sutünN LIKE pattern
-​
+
 PATTERN İÇİN
 % -> 0 veya daha fazla karakteri belirtir.
 _ -> Tek bir karakteri belirtir.
@@ -117,7 +120,23 @@ select * from personel where maas like '______';
 
 
 -- SORU15: 1. harfi A ve 7. harfi A olan personeli listeleyin
-select * from personel where isim like 'A_____A%'
+select * from personel where isim like 'A_____A%';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* ====================== SELECT - REGEXP_LIKE ================================
@@ -128,8 +147,8 @@ select * from personel where isim like 'A_____A%'
     --------
     REGEXP_LIKE(sutun_adı, 'pattern[] ', 'c' ] )
            
-/* =========================================================================*/
-​
+/* ========================================================================== */
+
 use batch59;
 
 CREATE TABLE kelimeler
@@ -175,6 +194,7 @@ select * from kelimeler where regexp_like(kelime, '^ho|hi');
 select * from kelimeler where regexp_like(kelime, '^ho|^hi');
 
 
+
 -- SORU19: Sonu 't' veya 'm' ile bitenleri büyük-küçük harfe dikkat etmeksizin listeleyeniz.
 -- Bitişi göstermek için $ karakteri kullanılır.
 select * from kelimeler where regexp_like(kelime, 't$|m$');
@@ -216,5 +236,4 @@ select * from kelimeler where regexp_like(kelime, '[mie]');
 
 
 -- SORU27: ilk harfi s veya b , 3. harfi l olan ve 5 harfli olan kelimelerin küçük harfe dikkat ederek listeleyiniz.
-
 
