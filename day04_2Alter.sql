@@ -28,24 +28,55 @@ INSERT INTO personel VALUES(456715012, 'Veli Sahin', 'Ankara', 4500, 'Ford');
 select * from personel;
    
 -- SORU1: personel tablosuna ulke_isim adinda ve default degeri 'Turkiye' olan yeni bir sutun ekleyiniz.
+alter table personel add ulke_isim varchar(20) default 'Turkiye';
+alter table personel add cinsiyet char default 'E';
+
+-- cinsiyet sutunu siliniz
+alter table personel drop column cinsiyet;
+select * from personel;
 
 
-
--- SORU2: personel tablosuna cinsiyet Varchar(20) ve yas int seklinde yeni sutunlar ekleyiniz.
+-- SORU2: personel tablosuna cinsiyet1 Varchar(20) ve yas int seklinde yeni sutunlar ekleyiniz.
+alter table personel add column (cinsiyet varchar (20), yas int);
 
  
     
 -- SORU3: personel tablosundan sirket sutununu siliniz.
+alter table personel drop column sirket;
 
 
  
 -- SORU4: personel tablosundaki ulke_isim sutununun adini ulke_adi olarak degistiriniz.
+-- alter table personel rename column ulke_ismi to ulke_adi;
+select * from personel;
 
 
 
 -- SORU5: personel tablosunun adini isciler olarak degistiriniz.
+alter table personel rename to isciler;
+select * from isciler;
+
 
 
 
 -- SORU6: isciler tablosundaki ulke_adi sutununa NOT NULL kisitlamasi ekleyiniz ve veri tipini VARCHAR(30) olarak değiştiriniz. 
+alter table isciler modify ulke_adi varchar(30) not null;
 
+-- maas 3000 e eşit ve büyük olan değerler veri olarak girilebilir.
+alter table isciler add constraint check (maas>=3000);
+
+alter table isciler drop column cinsiyet;
+alter table isciler drop column yas;
+select * from isciler;
+
+INSERT INTO isciler VALUES(123456710, 'Ali Yilmaz', 'Istanbul', 3000, 'USA');
+INSERT INTO isciler VALUES(127456716, 'Ali Yilmaz', 'Istanbul', 2000, 'CANADA'); --
+INSERT INTO isciler VALUES(123456234, 'Ali Yilmaz', 'Istanbul', 10000, 'England');
+INSERT INTO isciler VALUES(127456456, 'Ali Yilmaz', 'Istanbul', 1000, 'France'); --
+INSERT INTO isciler VALUES(234456456, 'Ali Yilmaz', 'Istanbul', 7500, 'Germany');
+
+
+
+
+
+SET SQL_SAFE_UPDATES = 0
