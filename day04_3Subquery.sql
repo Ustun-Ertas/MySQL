@@ -49,10 +49,16 @@ select marka_isim from markalar where calisan_Sayisi>15000;
 
 
 -- SORU2: marka_id’si 101’den büyük olan marka çalişanlarinin isim, maaş ve şehirlerini listeleyiniz.
+select isim, maas, sehir from calisanlar where isyeri in ('Adidad', 'LCWaikiki');
+
+-- ('Adida', 'LCWaikiki') bunu vererek sorguyu yazacagiz
+
+select isim, sehir, maas from calisanlar2 where isyeri in(select marka_isim from markalar where marka_id>101);
 
 
 
 -- SORU3: Ankara’da calisani olan markalarin marka id'lerini ve calisan sayilarini listeleyiniz.
+select marka_id, calisan_sayisi from markalar where marka_isim in(select isyeri from calisanlar where sehir ='Ankara');
 
 
 
@@ -67,14 +73,24 @@ select marka_isim from markalar where calisan_Sayisi>15000;
 ==============================================================================*/   
       
 -- SORU4: Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin toplam maaşini listeleyen bir Sorgu yaziniz.
+select marka_isim, calisan_sayisi, ( select sum(maas) from calisanlar where marka_isim= isyeri) from markalar;
 
 
  
 -- SORU5: Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin ortalama maaşini listeleyen bir Sorgu yaziniz.
 
 
- 
+
+SELECT marka_isim, calisan_sayisi, (select round(avg(maas),2) from calisanlar where marka_isim = isyeri) as ortlama_maas FROM markalar;
+
+-- round (avg(maas),2): virgulden sonra 2 basamak getirir.
+-- as yapilan sorguyu isimlendiriyoruz
+-- (x):(select maas from calisanlar where marka_isim = isyeri)
+
+
 -- SORU6: Her markanin ismini, calisan sayisini ve o markaya ait calisanlarin maksimum ve minumum maaşini listeleyen bir Sorgu yaziniz.
+select marka_isim,calisan_sayisi,(select max(maas) from calisanlar where isyeri=marka_isim) as max_maas,
+(select min(maas) from calisanlar where isyeri=marka_isim) as min_maas from markalar;
 
 
 -- max ve min maas bir arada olsun
@@ -82,5 +98,6 @@ select marka_isim from markalar where calisan_Sayisi>15000;
 
  
 -- SORU7: Her markanin id’sini, ismini ve toplam kaç şehirde bulunduğunu listeleyen bir SORGU yaziniz.
+select marka_id, marka_isim, (select count(sehir) from calisanlar where isyeri=marka_isim) as top_sehir from markalar;
 
 -- count(sehir) sehirleri sayar
